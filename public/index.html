@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html ng-app="airlineSearch">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Wego | Search! </title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+</head>
+
+<body ng-controller="searchController">
+    <div class="container">
+
+        <div class="jumbotron text-center">
+            <!-- FORM -->
+            <div id="search-form" class="row">
+                <div class="col-sm-12  text-center">
+                
+                    <form class="form-inline">
+                        <span class="text-muted">Find Airlines flying between </span>
+                        <div class="form-group">
+                            
+                            <input id="fromLoc" type="text" class="form-control input-lg text-center" placeholder="Ex. Singapore" ng-model="formData.from">
+                            
+                        </div>
+                        <span class="text-muted"> and </span>
+                        <div class="form-group">
+                            
+                            <input id="toLoc" type="text" class="form-control input-lg text-center" placeholder="Ex. Malaysia" ng-model="formData.to">
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-lg" ng-click="searchAirlines()">Search</button>
+                    </form>
+                </div>
+            </div> <!-- END FORM -->
+         </div>
+
+        <!-- AIRLINE LIST -->
+        <hr/>
+        <div id="airlineListSection">
+            <p class="title label-success"> AIRLINE LIST </p>
+            <div ng-repeat="airline in airlineList">
+                <p class="panel listItem" ><span >{{$index + 1}}. </span><span> {{ airline }} </span> </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="core.js"></script>
+</body>
+</html>
