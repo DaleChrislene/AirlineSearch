@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
 </head>
 
-<body ng-controller="searchController">
+<body ng-controller="SearchController">
     <div class="container">
 
         <div class="jumbotron text-center">
@@ -21,33 +21,40 @@
             <div id="search-form" class="row">
                 <div class="col-sm-12  text-center">
                 
-                    <form class="form-inline">
-                        <span class="text-muted">Find Airlines flying between </span>
+                    <form class="form-inline" name="inputForm">
+                        <span class="text-statement">Find Airlines flying between </span>
                         <div class="form-group">
                             
-                            <input id="fromLoc" type="text" class="form-control input-lg text-center" placeholder="Ex. Singapore" ng-model="formData.from">
+                            <input id="fromLoc" type="text" class="form-control input-lg text-center" placeholder="Ex. Singapore" ng-model="formData.from" required>
                             
                         </div>
-                        <span class="text-muted"> and </span>
+                        <span class="text-statement"> and </span>
                         <div class="form-group">
                             
-                            <input id="toLoc" type="text" class="form-control input-lg text-center" placeholder="Ex. Malaysia" ng-model="formData.to">
+                            <input id="toLoc" type="text" class="form-control input-lg text-center" placeholder="Ex. Tokyo" ng-model="formData.to" required>
                         </div>
 
-                        <button type="submit" class="btn btn-success btn-lg" ng-click="searchAirlines()">Search</button>
+                        <button type="submit" class="btn btn-success btn-lg" 
+                        ng-disabled="inputForm.$invalid"
+                        ng-click="searchAirlines()">Search</button>
                     </form>
                 </div>
             </div> <!-- END FORM -->
          </div>
 
         <!-- AIRLINE LIST -->
-        <hr/>
+        
         <div id="airlineListSection">
-            <p class="title label-success"> AIRLINE LIST </p>
+            <p class="title label-success"> AIRLINE LIST  <span ng-show="init">: {{titleFrom}} - {{titleTo}} </span></p>
             <div ng-repeat="airline in airlineList">
-                <p class="panel listItem" ><span >{{$index + 1}}. </span><span> {{ airline }} </span> </p>
+                <p class="panel listItem" ><span >{{$index + 1}}. </span><span> {{ airline['airlineName'] }} </span> </p>
+            </div>
+
+            <div id="errorMessage" ng-hide="hasAirline">
+                <p class="error"> There are no airlines flying this route! </p>
             </div>
         </div>
+        
     </div>
 
 
