@@ -10,8 +10,14 @@ function SearchController($scope, $http){
 	searchApiUrl = 'https://pure-river-4101.herokuapp.com/';
 
 	$scope.searchAirlines = function(){
+
+		$('body').addClass("loading");
+
 		$http.post(searchApiUrl+'api/v1/search',$scope.formData)
 		.success(function(data){
+
+			$('body').removeClass("loading");
+
 			$scope.titleFrom = capitalize($scope.formData.from);
 			$scope.titleTo = capitalize($scope.formData.to);
 			$scope.formData = {};
@@ -31,8 +37,4 @@ function SearchController($scope, $http){
 			console.log('Error: ' + data);
 		})
 	}
-}
-
-function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
