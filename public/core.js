@@ -8,7 +8,7 @@ function SearchController($scope, $http){
 	$scope.init = false;
 
 	$scope.searchAirlines = function(){
-		$http.post('http://localhost:3000/api/v1/search',$scope.formData)
+		$http.post('https://pure-river-4101.herokuapp.com/',$scope.formData)
 		.success(function(data){
 			$scope.titleFrom = capitalize($scope.formData.from);
 			$scope.titleTo = capitalize($scope.formData.to);
