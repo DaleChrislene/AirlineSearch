@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/jasmine.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/jasmine.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/jasmine-html.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/boot.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+        <script type="text/javascript" src="https://code.angularjs.org/1.4.0-rc.2/angular.min.js"></script>
+    <script type="text/javascript" src="https://code.angularjs.org/1.4.0-rc.2/angular-mocks.js"></script>
+        <script src="core.js"></script>
+    </head>
+    <body>
+    </body>
+    <script type="text/javascript">
+
+        beforeEach(module('airlineSearch'));
+        var $controller;
+        beforeEach(inject(function(_$controller_){
+            $controller = _$controller_;
+        }));
+
+        // The tests
+        describe('Set Result List', function () {
+            describe('Expected list length size is 0', function () {
+
+                it('Parameter is null', function () {
+                    initialResultList = null;
+                    expectedResultList = [];
+                    expect(setResultList(initialResultList).length).toBe(0);
+                }); 
+            });
+
+            describe('Expected list length size is 1', function () {
+                it('Parameter is: {"airline":{"airlineName":"Test"}}', function () {
+                    initialResultList = {"airline":{"airlineName":"Test"}};
+                    expect(setResultList(initialResultList).length).toBe(1);
+                }); 
+            });
+
+            describe('Expected list length size is 3', function () {
+                it('Parameter Result List is: {"airline":[{"airlineName":"Test"}{"airlineName":"Test"},{"airlineName":"Test"}]}', function () {
+                    
+                    initialResultList = {"airline":
+                                    [{"airlineName":"Test"},
+                                        {"airlineName":"Test"},
+                                            {"airlineName":"Test"}]};
+                    
+                    expect(setResultList(initialResultList).length).toBe(3);
+                }); 
+
+            });
+        });
+
+    </script>
+</html>
